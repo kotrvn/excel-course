@@ -47,6 +47,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "css-loader": "^4.3.0"
+    "css-loader": "^4.3.0",
+    "normalize.css": "^8.0.1"
   }
 }
