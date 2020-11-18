@@ -13,7 +13,6 @@ export class Table extends ExcelComponent {
     super($root, {
       name: 'Table',
       listeners: ['mousedown', 'keydown', 'input'],
-      
       ...options,
     })
   }
@@ -32,6 +31,7 @@ export class Table extends ExcelComponent {
 
     this.$on('formula:input', text => {
       this.selection.current.text(text)
+      this.updateTextInStore(text)
     })
 
     this.$on('formula:done', () => {
@@ -39,14 +39,15 @@ export class Table extends ExcelComponent {
     })
   }
 
-  selectCell(cell) {
-    this.selection.select(cell)
-    this.$emit('table:input', cell)
+  selectCell($cell) {
+    this.selection.select($cell)
+    this.$emit('table:select', $cell)
   }
 
   async resizeTable(event) {
     try {
       const data = await resizeHandler(this.$root, event)
+      console.log(data);
       this.$dispatch(actions.tableResize(data))
     } catch (e) {
       console.warn('Res-err', e.massage);
@@ -88,7 +89,15 @@ export class Table extends ExcelComponent {
     }
   }
 
+  updateTextInStore(value) {
+    this.$dispatch(actions.changeText({
+      id: this.selection.current.id(),
+      value,
+    }))
+  }
+
   onInput(event) {
-    this.$emit('table:input', $(event.target))
+    // this.$emit('table:input', $(event.target))
+    this.updateTextInStore($(event.target).text())
   }
 }
