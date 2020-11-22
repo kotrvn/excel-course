@@ -34,9 +34,7 @@ export class ExcelComponent extends DomListener {
   }
 
   // Сюда приходят только изменения по тем полям на которые мы подписались
-  storeChanged() {
-
-  }
+  storeChanged() {}
 
   isWatching(key) {
     return this.subscribe.includes(key)
