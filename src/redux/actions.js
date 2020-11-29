@@ -5,6 +5,7 @@ import {
   APPLY_STYLE,
   CHANGE_TITLE,
 } from "./types";
+import {UPDATE_DATE} from "@/redux/types";
 
 
 // ACTION CREATOR
@@ -40,5 +41,11 @@ export function changeTitle(data) {
   return {
     type: CHANGE_TITLE,
     data,
+  }
+}
+
+export function updateDate() {
+  return {
+    type: UPDATE_DATE,
   }
 }
